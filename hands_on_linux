@@ -1,0 +1,33 @@
+Create AWS instance according instructions
+https://rit.accenture.com/batc-confluence/display/DI/AWS+Instance+creation+steps 
+
+users
+whoami – view user
+sudo su – change user to root to create new user
+adduser admin – create admin user
+*in my case user admin was already existing with passwords, so I had to reset psw with command:
+sudo passwd -d admin
+I have also checked privileges of existing admin and added ALL privileges with command
+visudo
+sudo shown admin:sudo . – added admin user in sudo group
+sudo adduser director – add user director
+sudo addgroup maintenance – add group maintenance
+
+archive
+after user changed to admin:
+cd /etc/nginx/ - go to nginx directory
+tar -czf compressed.tar.gz /etc/nginx/ - create archive from /etc/nginx/* directory
+tar -tf compressed.tar.gz - shows what in compressed folder
+cd /opt – move to opt directory
+mkdir archive – create archive directory
+cd /etc/nginx/ - move to nginx directory
+mv compressed.tar.gz  opt/archive - moves archives folder to opt/archive
+chown director archive – changes owner to director
+chown :maintenance archive – changes group to maintenance
+it is also possible to change permissions for archive folder for user/group/others:
+chmod 754 archive
+
+create output.txt file with executed commands
+cd /opt/archive
+vim output.txt
+

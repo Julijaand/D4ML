@@ -42,4 +42,4 @@ store_command() {
 }
 Example usage
 store_command ls -l
-store_command echo "Hello, World!"
+store_command echo "git mkdir archive!"

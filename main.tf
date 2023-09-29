@@ -15,7 +15,7 @@ resource "aws_security_group" "JuliasSecurityGroup" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["84.15.188.85/32"]
   }
 
   egress {
@@ -37,10 +37,27 @@ resource "aws_instance" "Julijas_instance"{
     ami = "ami-d4ml-2022-10-05T10-47-38Z"
     instance_type = "t2.micro"
     key_name = "julias_key_pair"
-}
 
-connection {
-    # type = "ssh"
-    user = "admin"
-    private_key = file("C:/Users/julija.andrusenko/Desktop/julias_key_pair.pem")
+    tags = {
+    Name = "Julijas_instance"
+  }
+   provisioner "remote-exec" {
+    inline = [
+      "sudo useradd -m -s /bin/bash admin",  # Create admin user
+      "echo 'admin:XXXXXXX' | sudo chpasswd",  # Set the admin's password
+
+      "sudo useradd -m -s /bin/bash director",  # Create director user
+      "echo 'director:XXXXXXX' | sudo chpasswd",  # Set the director's password
+
+      "sudo groupadd maintanance",  # Create a new group named "maintanance"
+      "sudo usermod -aG maintanance director",  # Add director to the group "maintanance"
+    ]
+    
+
+    # connection {
+    #   type        = "ssh"
+    #   user        = "admin"
+    #   private_key = file("C:/Users/julija.andrusenko/Desktop/julias_key_pair.pem")  # Replace with the path to your private key
+    # }
+  }
 }

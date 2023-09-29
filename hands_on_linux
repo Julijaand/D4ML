@@ -29,5 +29,17 @@ chmod 754 archive
 
 create output.txt file with executed commands
 cd /opt/archive
-vim output.txt
 
+#!/bin/bash
+Define the file where you want to store the commands
+file="output.txt"
+
+Function to execute a command and store it in the file
+store_command() {
+    command="$@"
+    echo "$command" >> "$file"
+    eval "$command"
+}
+Example usage
+store_command ls -l
+store_command echo "Hello, World!"

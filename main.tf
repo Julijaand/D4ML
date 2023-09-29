@@ -1,7 +1,7 @@
 provider "aws" {
     region = "eu-central-1"
 }
-resource "aws_security_group" "final_assignment_group_four_security_group" {
+resource "aws_security_group" "JuliasSecurityGroup" {
     name        = "JuliasSecurityGroup"
 
   ingress {

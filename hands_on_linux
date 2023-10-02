@@ -24,22 +24,18 @@ cd /etc/nginx/ - move to nginx directory
 mv compressed.tar.gz  opt/archive - moves archives folder to opt/archive
 chown director archive – changes owner to director
 chown :maintenance archive – changes group to maintenance
-it is also possible to change permissions for archive folder for user/group/others:
-chmod 754 archive
 
-create output.txt file with executed commands
-cd /opt/archive
+create output.txt and change permissions:
+chmod 775 output.txt
+create .sh file with function for saving commands in output.txt file:
 
-#!/bin/bash
-Define the file where you want to store the commands
-file="output.txt"
-
-Function to execute a command and store it in the file
+file = "output.txt"
 store_command() {
     command="$@"
     echo "$command" >> "$file"
     eval "$command"
 }
-Example usage
-store_command ls -l
-store_command echo "git mkdir archive!"
+#test scrypt:
+store_command aws s3 ls
+store_command echo "Hello, AWS!"
+cd /opt/archive

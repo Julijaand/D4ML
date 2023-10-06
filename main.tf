@@ -38,12 +38,4 @@ resource "aws_instance" "Julijas_instance"{
       "sudo groupadd maintanance",  # Create a new group named "maintanance"
       "sudo usermod -aG maintanance director",  # Add director to the group "maintanance"
     ]
-    
 
-    # connection {
-    #   type        = "ssh"
-    #   user        = "admin"
-    #   private_key = file("C:/Users/julija.andrusenko/Desktop/julias_key_pair.pem")  # Replace with the path to your private key
-    # }
-  }
-}

@@ -30,10 +30,8 @@ resource "aws_instance" "Julijas_instance"{
    provisioner "remote-exec" {
     inline = [
       "sudo useradd -m -s /bin/bash admin",  # Create admin user
-      "echo 'admin:XXXXXXX' | sudo chpasswd",  # Set the admin's password
 
       "sudo useradd -m -s /bin/bash director",  # Create director user
-      "echo 'director:XXXXXXX' | sudo chpasswd",  # Set the director's password
 
       "sudo groupadd maintanance",  # Create a new group named "maintanance"
       "sudo usermod -aG maintanance director",  # Add director to the group "maintanance"
